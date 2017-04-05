@@ -1,0 +1,26 @@
+{
+  "name": "date-helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/date-helper.common.js",
+  "module": "dist/date-helper.esm.js",
+  "scripts": {
+    "build": "node build/build.js"
+  },
+  "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
+  "unpkg": "dist/date-helper.js",
+  "bugs": {
+    "url": "https://github.com/phphe/date-helper/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/phphe/date-helper.git"
+  },
+  "devDependencies": {
+    "rollup-helper": "^1.0.3"
+  },
+  "dependencies": {
+    "helper-js": "^1.0.3"
+  },
+  "license": "MIT"
+}
