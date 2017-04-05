@@ -1,15 +1,114 @@
 /*!
- * date-helper v1.0.0
+ * date-functions v1.0.1
+ * phphe <phphe@outlook.com> (https://github.com/phphe)
+ * https://github.com/phphe/date-functions.git
+ * Released under the MIT License.
+ */
+
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.dateFunctions = global.dateFunctions || {})));
+}(this, (function (exports) { 'use strict';
+
+/*!
+ * helper-js v1.0.0
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * undefined
  * Released under the MIT License.
  */
 
-'use strict';
+// is 各种判断
+function isset(v) {
+  return typeof v !== 'undefined';
+}
+function isNumber(v) {
+  return Object.prototype.toString.call(v) === '[object Number]';
+}
+function isNumeric(v) {
+  var num = parseFloat(v);
+  return !isNaN(num) && isNumber(num);
+}
+function isObject(v) {
+  return Object.prototype.toString.call(v) === '[object Object]';
+}
+function isFunction(v) {
+  return typeof v === 'function';
+}
+// str 字符
+function studlyCase(str) {
+  return str && str[0].toUpperCase() + str.substr(1);
+}
+function replaceMultiple(mapObj, str) {
+  var reg = new RegExp(Object.keys(mapObj).join('|'), 'g');
+  return str.replace(reg, function (matchedKey) {
+    return mapObj[matchedKey];
+  });
+}
+function getOffset(el) {
+  var elOffset = {
+    x: el.offsetLeft,
+    y: el.offsetTop
+  };
+  var parentOffset = { x: 0, y: 0 };
+  if (el.offsetParent != null) parentOffset = getOffset(el.offsetParent);
+  return {
+    x: elOffset.x + parentOffset.x,
+    y: elOffset.y + parentOffset.y
+  };
+}
+// overload waitFor(condition, time = 100, maxCount = 1000))
+function waitFor(name, condition) {
+  var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 100;
+  var maxCount = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1000;
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var helperJs = require('helper-js');
+  if (isFunction(name)) {
+    maxCount = time;
+    time = isNumeric(condition) ? condition : 100;
+    condition = name;
+    name = null;
+  }
+  if (!waitFor._waits) {
+    waitFor._waits = {};
+  }
+  var waits = waitFor._waits;
+  if (name && isset(waits[name])) {
+    window.clearInterval(waits[name]);
+    delete waits[name];
+  }
+  return new Promise(function (resolve, reject) {
+    var count = 0;
+    function judge(interval) {
+      if (count <= maxCount) {
+        if (condition()) {
+          stop(interval, name);
+          resolve();
+        }
+      } else {
+        stop(interval, name);
+        reject(new Error('waitFor: Limit is reached'));
+      }
+      count++;
+    }
+    function stop(interval, name) {
+      if (interval) {
+        if (name && isset(waits[name])) {
+          window.clearInterval(waits[name]);
+          delete waits[name];
+        } else {
+          window.clearInterval(interval);
+        }
+      }
+    }
+    var interval = window.setInterval(function () {
+      judge(interval);
+    }, time);
+    if (name) {
+      waits[name] = interval;
+    }
+    judge();
+  });
+}
 
 // Most of the methods will affect the original object
 // 大部分方法将影响原对象
@@ -123,7 +222,7 @@ function format(dateObj) {
     'TT': d.getHours() < 12 ? 'AM' : 'PM',
     'Z': d.toUTCString().match(/[A-Z]+$/)
   };
-  return helperJs.replaceMultiple(replaceObj, mask);
+  return replaceMultiple(replaceObj, mask);
 }
 
 exports.clone = clone;
@@ -143,3 +242,7 @@ exports.subYear = subYear;
 exports.getMonthStart = getMonthStart;
 exports.getMonthEnd = getMonthEnd;
 exports.format = format;
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

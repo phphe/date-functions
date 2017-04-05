@@ -1,7 +1,7 @@
 /*!
- * date-helper v1.0.0
+ * date-functions v1.0.1
  * phphe <phphe@outlook.com> (https://github.com/phphe)
- * undefined
+ * https://github.com/phphe/date-functions.git
  * Released under the MIT License.
  */
 
