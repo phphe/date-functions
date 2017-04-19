@@ -20,7 +20,7 @@
     "rollup-helper": "^1.0.3"
   },
   "dependencies": {
-    "helper-js": "^1.0.3"
+    "helper-js": "^1.0.6"
   },
   "license": "MIT"
 }
