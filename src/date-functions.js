@@ -60,7 +60,7 @@ export function getMonthEnd (dateObj) {
 }
 // 对Date的扩展，将 Date 转化为指定格式的String
 // from: http://blog.csdn.net/vbangle/article/details/5643091/
-export function format (dateObj, mask = 'yyyy-MM-dd hh:mm:ss') {
+export function format (dateObj, mask = 'yyyy-MM-dd HH:mm:ss') {
   var d = dateObj
 
   var zeroize = function (value, length) {

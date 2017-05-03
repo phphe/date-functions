@@ -1,5 +1,5 @@
 /*!
- * date-functions v1.0.1
+ * date-functions v1.0.3
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/date-functions.git
  * Released under the MIT License.
@@ -12,7 +12,7 @@
 }(this, (function (exports) { 'use strict';
 
 /*!
- * helper-js v1.0.6
+ * helper-js v1.0.10
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/helper-js.git
  * Released under the MIT License.
@@ -45,6 +45,15 @@ function replaceMultiple(mapObj, str) {
     return mapObj[matchedKey];
   });
 }
+// source: http://youmightnotneedjquery.com/
+function hasClass(el, className) {
+  if (el.classList) {
+    return el.classList.contains(className);
+  } else {
+    return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+  }
+}
+
 var storeOfWaitFor = {};
 
 // Most of the methods will affect the original object
@@ -109,7 +118,7 @@ function getMonthEnd(dateObj) {
 // 对Date的扩展，将 Date 转化为指定格式的String
 // from: http://blog.csdn.net/vbangle/article/details/5643091/
 function format(dateObj) {
-  var mask = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd hh:mm:ss';
+  var mask = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-MM-dd HH:mm:ss';
 
   var d = dateObj;
 

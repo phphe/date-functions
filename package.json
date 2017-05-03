@@ -1,6 +1,6 @@
 {
   "name": "date-functions",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/date-functions.common.js",
   "module": "dist/date-functions.esm.js",
@@ -20,7 +20,7 @@
     "rollup-helper": "^1.0.3"
   },
   "dependencies": {
-    "helper-js": "^1.0.6"
+    "helper-js": "^1.0.11"
   },
   "license": "MIT"
 }
