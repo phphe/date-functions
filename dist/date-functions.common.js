@@ -1,5 +1,5 @@
 /*!
- * date-functions v1.0.3
+ * date-functions v1.0.4
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/date-functions.git
  * Released under the MIT License.

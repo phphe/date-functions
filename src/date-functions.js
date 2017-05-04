@@ -48,12 +48,12 @@ export function subYear (dateObj) {
   return addYears(dateObj, -1)
 }
 export function getMonthStart (dateObj) {
-  let clonedObj = clone(dateObj)
+  const clonedObj = clone(dateObj)
   clonedObj.setDate(1)
   return clonedObj
 }
 export function getMonthEnd (dateObj) {
-  let r = clone(dateObj)
+  const r = clone(dateObj)
   addMonth(r)
   r.setDate(0)
   return r
