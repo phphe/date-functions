@@ -128,11 +128,11 @@ export function format (dateObj, mask = 'yyyy-MM-dd HH:mm:ss') {
     'yyyy': d.getFullYear(),
     'yy': String(d.getFullYear()).substr(2),
     //
-    'hh': zeroize(d.getSeconds() % 12 || 12),
-    'h': d.getSeconds() % 12 || 12,
+    'hh': zeroize(d.getHours() % 12 || 12),
+    'h': d.getHours() % 12 || 12,
     //
-    'HH': zeroize(d.getSeconds()),
-    'H': d.getSeconds(),
+    'HH': zeroize(d.getHours()),
+    'H': d.getHours(),
     //
     'mm': zeroize(d.getMinutes()),
     'm': d.getMinutes(),
