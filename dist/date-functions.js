@@ -1,5 +1,5 @@
 /*!
- * date-functions v1.0.5
+ * date-functions v1.0.6
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/date-functions.git
  * Released under the MIT License.
@@ -70,7 +70,7 @@ function change(dateObj, type, n) {
 }
 
 function addSeconds(dateObj, n) {
-  return change(dateObj, 'Second', n);
+  return change(dateObj, 'Seconds', n);
 }
 function addSecond(dateObj) {
   return addSeconds(dateObj, 1);
@@ -83,7 +83,7 @@ function subSecond(dateObj) {
 }
 
 function addMinutes(dateObj, n) {
-  return change(dateObj, 'Minute', n);
+  return change(dateObj, 'Minutes', n);
 }
 function addMinute(dateObj) {
   return addMinutes(dateObj, 1);
@@ -96,7 +96,7 @@ function subMinute(dateObj) {
 }
 
 function addHours(dateObj, n) {
-  return change(dateObj, 'Hour', n);
+  return change(dateObj, 'Hours', n);
 }
 function addHour(dateObj) {
   return addHours(dateObj, 1);
