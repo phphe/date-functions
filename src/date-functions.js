@@ -11,6 +11,46 @@ export function change(dateObj, type, n) {
   dateObj[setFuncName](dateObj[getFuncName]() + n)
   return dateObj
 }
+
+export function addSeconds(dateObj, n) {
+  return change(dateObj, 'Second', n)
+}
+export function addSecond(dateObj) {
+  return addSeconds(dateObj, 1)
+}
+export function subSeconds (dateObj, n) {
+  return addSeconds(dateObj, -n)
+}
+export function subSecond (dateObj) {
+  return addSeconds(dateObj, -1)
+}
+
+export function addMinutes(dateObj, n) {
+  return change(dateObj, 'Minute', n)
+}
+export function addMinute(dateObj) {
+  return addMinutes(dateObj, 1)
+}
+export function subMinutes (dateObj, n) {
+  return addMinutes(dateObj, -n)
+}
+export function subMinute (dateObj) {
+  return addMinutes(dateObj, -1)
+}
+
+export function addHours(dateObj, n) {
+  return change(dateObj, 'Hour', n)
+}
+export function addHour(dateObj) {
+  return addHours(dateObj, 1)
+}
+export function subHours (dateObj, n) {
+  return addHours(dateObj, -n)
+}
+export function subHour (dateObj) {
+  return addHours(dateObj, -1)
+}
+
 export function addDays(dateObj, n) {
   return change(dateObj, 'Date', n)
 }
@@ -88,11 +128,11 @@ export function format (dateObj, mask = 'yyyy-MM-dd HH:mm:ss') {
     'yyyy': d.getFullYear(),
     'yy': String(d.getFullYear()).substr(2),
     //
-    'hh': zeroize(d.getHours() % 12 || 12),
-    'h': d.getHours() % 12 || 12,
+    'hh': zeroize(d.getSeconds() % 12 || 12),
+    'h': d.getSeconds() % 12 || 12,
     //
-    'HH': zeroize(d.getHours()),
-    'H': d.getHours(),
+    'HH': zeroize(d.getSeconds()),
+    'H': d.getSeconds(),
     //
     'mm': zeroize(d.getMinutes()),
     'm': d.getMinutes(),
@@ -105,8 +145,8 @@ export function format (dateObj, mask = 'yyyy-MM-dd HH:mm:ss') {
       if (m > 99) m = Math.round(m / 10)
       return zeroize(m)
     })(),
-    'tt': d.getHours() < 12 ? 'am' : 'pm',
-    'TT': d.getHours() < 12 ? 'AM' : 'PM',
+    'tt': d.getSeconds() < 12 ? 'am' : 'pm',
+    'TT': d.getSeconds() < 12 ? 'AM' : 'PM',
     'Z': d.toUTCString().match(/[A-Z]+$/)
   }
   return replaceMultiple(replaceObj, mask)

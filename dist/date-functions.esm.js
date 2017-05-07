@@ -1,5 +1,5 @@
 /*!
- * date-functions v1.0.4
+ * date-functions v1.0.5
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/date-functions.git
  * Released under the MIT License.
@@ -19,6 +19,46 @@ function change(dateObj, type, n) {
   dateObj[setFuncName](dateObj[getFuncName]() + n);
   return dateObj;
 }
+
+function addSeconds(dateObj, n) {
+  return change(dateObj, 'Second', n);
+}
+function addSecond(dateObj) {
+  return addSeconds(dateObj, 1);
+}
+function subSeconds(dateObj, n) {
+  return addSeconds(dateObj, -n);
+}
+function subSecond(dateObj) {
+  return addSeconds(dateObj, -1);
+}
+
+function addMinutes(dateObj, n) {
+  return change(dateObj, 'Minute', n);
+}
+function addMinute(dateObj) {
+  return addMinutes(dateObj, 1);
+}
+function subMinutes(dateObj, n) {
+  return addMinutes(dateObj, -n);
+}
+function subMinute(dateObj) {
+  return addMinutes(dateObj, -1);
+}
+
+function addHours(dateObj, n) {
+  return change(dateObj, 'Hour', n);
+}
+function addHour(dateObj) {
+  return addHours(dateObj, 1);
+}
+function subHours(dateObj, n) {
+  return addHours(dateObj, -n);
+}
+function subHour(dateObj) {
+  return addHours(dateObj, -1);
+}
+
 function addDays(dateObj, n) {
   return change(dateObj, 'Date', n);
 }
@@ -98,11 +138,11 @@ function format(dateObj) {
     'yyyy': d.getFullYear(),
     'yy': String(d.getFullYear()).substr(2),
     //
-    'hh': zeroize(d.getHours() % 12 || 12),
-    'h': d.getHours() % 12 || 12,
+    'hh': zeroize(d.getSeconds() % 12 || 12),
+    'h': d.getSeconds() % 12 || 12,
     //
-    'HH': zeroize(d.getHours()),
-    'H': d.getHours(),
+    'HH': zeroize(d.getSeconds()),
+    'H': d.getSeconds(),
     //
     'mm': zeroize(d.getMinutes()),
     'm': d.getMinutes(),
@@ -115,11 +155,11 @@ function format(dateObj) {
       if (m > 99) m = Math.round(m / 10);
       return zeroize(m);
     }(),
-    'tt': d.getHours() < 12 ? 'am' : 'pm',
-    'TT': d.getHours() < 12 ? 'AM' : 'PM',
+    'tt': d.getSeconds() < 12 ? 'am' : 'pm',
+    'TT': d.getSeconds() < 12 ? 'AM' : 'PM',
     'Z': d.toUTCString().match(/[A-Z]+$/)
   };
   return replaceMultiple(replaceObj, mask);
 }
 
-export { clone, change, addDays, addDay, subDays, subDay, addMonths, addMonth, subMonths, subMonth, addYears, addYear, subYears, subYear, getMonthStart, getMonthEnd, format };
+export { clone, change, addSeconds, addSecond, subSeconds, subSecond, addMinutes, addMinute, subMinutes, subMinute, addHours, addHour, subHours, subHour, addDays, addDay, subDays, subDay, addMonths, addMonth, subMonths, subMonth, addYears, addYear, subYears, subYear, getMonthStart, getMonthEnd, format };
