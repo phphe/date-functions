@@ -13,7 +13,7 @@ export function change(dateObj, type, n) {
 }
 
 export function addSeconds(dateObj, n) {
-  return change(dateObj, 'Second', n)
+  return change(dateObj, 'Seconds', n)
 }
 export function addSecond(dateObj) {
   return addSeconds(dateObj, 1)
@@ -26,7 +26,7 @@ export function subSecond (dateObj) {
 }
 
 export function addMinutes(dateObj, n) {
-  return change(dateObj, 'Minute', n)
+  return change(dateObj, 'Minutes', n)
 }
 export function addMinute(dateObj) {
   return addMinutes(dateObj, 1)
@@ -39,7 +39,7 @@ export function subMinute (dateObj) {
 }
 
 export function addHours(dateObj, n) {
-  return change(dateObj, 'Hour', n)
+  return change(dateObj, 'Hours', n)
 }
 export function addHour(dateObj) {
   return addHours(dateObj, 1)
