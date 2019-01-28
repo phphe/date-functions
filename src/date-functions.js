@@ -1,6 +1,6 @@
 // Most of the methods will affect the original object
 // 大部分方法将影响原对象
-import { replaceMultiple } from 'helper-js'
+import * as hp from 'helper-js'
 //
 export function clone(dateObj) {
   return new Date(dateObj.getTime())
@@ -149,5 +149,68 @@ export function format (dateObj, mask = 'yyyy-MM-dd HH:mm:ss') {
     'TT': d.getSeconds() < 12 ? 'AM' : 'PM',
     'Z': d.toUTCString().match(/[A-Z]+$/)
   }
-  return replaceMultiple(replaceObj, mask)
+  return hp.replaceMultiple(replaceObj, mask)
+}
+/**
+ * [getCalendar description]
+ * @param  {[type]} year         [description]
+ * @param  {[type]} month        [description]
+ * @param  {Number} [startWeekDay=0] [0 is sunday]
+ * @return {[type]}              [description]
+ */
+export function getCalendar(year, month, startWeekDay = 0) {
+  const results = []
+  const date = new Date(year, month - 1)
+  year = date.getFullYear()
+  month = date.getMonth() - 1
+  const monthStart = getMonthStart(date)
+  const monthStartDay = monthStart.getDay()
+  const calendarStart = subDays(clone(monthStart), monthStartDay + startWeekDay)
+  if (monthStartDay > startWeekDay) {
+    const startDate = calendarStart.getDate()
+    const year = calendarStart.getFullYear()
+    const month = calendarStart.getMonth() - 1
+    for (let i = startWeekDay; i < monthStartDay; i++) {
+      const date = startDate + i
+      results.push({
+        year,
+        month,
+        date: date,
+        text: date,
+        prevMonth: true,
+      })
+    }
+  }
+  //
+  const monthEnd = getMonthEnd(date)
+  const monthEndtDate = monthEnd.getDate()
+  for (let i = 1; i <= monthEndtDate; i++) {
+    const date = i
+    results.push({
+      year: year,
+      month: month,
+      date,
+      text: date,
+      currentMonth: true,
+    })
+  }
+  //
+  const monthEndDay = monthEnd.getDay()
+  const endWeekDay = 6 - startWeekDay
+  if (monthEndDay < endWeekDay) {
+    const nextMonth = addMonth(clone(date))
+    const year = nextMonth.getFullYear()
+    const month = nextMonth.getMonth() - 1
+    for (let i = monthEndDay + 1, date = 1; i <= endWeekDay; i++, date++) {
+      results.push({
+        year: year,
+        month: month,
+        date: date,
+        text: date,
+        nextMonth: true,
+      })
+    }
+  }
+  //
+  return hp.splitArray(results, 7)
 }
