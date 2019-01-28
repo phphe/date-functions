@@ -1,6 +1,6 @@
 {
   "name": "date-functions",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "dist/date-functions.common.js",
   "module": "dist/date-functions.esm.js",
