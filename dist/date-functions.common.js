@@ -1,5 +1,5 @@
 /*!
- * date-functions v1.0.7
+ * date-functions v1.0.8
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/date-functions.git
  * Released under the MIT License.
@@ -9,7 +9,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var helperJs = require('helper-js');
+var hp = require('helper-js');
 
 // Most of the methods will affect the original object
 // 大部分方法将影响原对象
@@ -163,7 +163,72 @@ function format(dateObj) {
     'TT': d.getSeconds() < 12 ? 'AM' : 'PM',
     'Z': d.toUTCString().match(/[A-Z]+$/)
   };
-  return helperJs.replaceMultiple(replaceObj, mask);
+  return hp.replaceMultiple(replaceObj, mask);
+}
+/**
+ * [getCalendar description]
+ * @param  {[type]} year         [description]
+ * @param  {[type]} month        [description]
+ * @param  {Number} [startWeekDay=0] [0 is sunday]
+ * @return {[type]}              [description]
+ */
+function getCalendar(year, month) {
+  var startWeekDay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+  var results = [];
+  var date = new Date(year, month - 1);
+  year = date.getFullYear();
+  month = date.getMonth() - 1;
+  var monthStart = getMonthStart(date);
+  var monthStartDay = monthStart.getDay();
+  var calendarStart = subDays(clone(monthStart), monthStartDay + startWeekDay);
+  if (monthStartDay > startWeekDay) {
+    var startDate = calendarStart.getDate();
+    var _year = calendarStart.getFullYear();
+    var _month = calendarStart.getMonth() - 1;
+    for (var i = startWeekDay; i < monthStartDay; i++) {
+      var _date = startDate + i;
+      results.push({
+        year: _year,
+        month: _month,
+        date: _date,
+        text: _date,
+        prevMonth: true
+      });
+    }
+  }
+  //
+  var monthEnd = getMonthEnd(date);
+  var monthEndtDate = monthEnd.getDate();
+  for (var _i = 1; _i <= monthEndtDate; _i++) {
+    var _date2 = _i;
+    results.push({
+      year: year,
+      month: month,
+      date: _date2,
+      text: _date2,
+      currentMonth: true
+    });
+  }
+  //
+  var monthEndDay = monthEnd.getDay();
+  var endWeekDay = 6 - startWeekDay;
+  if (monthEndDay < endWeekDay) {
+    var nextMonth = addMonth(clone(date));
+    var _year2 = nextMonth.getFullYear();
+    var _month2 = nextMonth.getMonth() - 1;
+    for (var _i2 = monthEndDay + 1, _date3 = 1; _i2 <= endWeekDay; _i2++, _date3++) {
+      results.push({
+        year: _year2,
+        month: _month2,
+        date: _date3,
+        text: _date3,
+        nextMonth: true
+      });
+    }
+  }
+  //
+  return hp.splitArray(results, 7);
 }
 
 exports.clone = clone;
@@ -195,3 +260,4 @@ exports.subYear = subYear;
 exports.getMonthStart = getMonthStart;
 exports.getMonthEnd = getMonthEnd;
 exports.format = format;
+exports.getCalendar = getCalendar;
