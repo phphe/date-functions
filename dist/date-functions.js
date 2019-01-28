@@ -1,5 +1,5 @@
 /*!
- * date-functions v1.0.8
+ * date-functions v1.0.10
  * phphe <phphe@outlook.com> (https://github.com/phphe)
  * https://github.com/phphe/date-functions.git
  * Released under the MIT License.
@@ -903,14 +903,14 @@ function getCalendar(year, month) {
   var results = [];
   var date = new Date(year, month - 1);
   year = date.getFullYear();
-  month = date.getMonth() - 1;
+  month = date.getMonth() + 1;
   var monthStart = getMonthStart(date);
   var monthStartDay = monthStart.getDay();
   var calendarStart = subDays(clone(monthStart), monthStartDay + startWeekDay);
   if (monthStartDay > startWeekDay) {
     var startDate = calendarStart.getDate();
     var _year = calendarStart.getFullYear();
-    var _month = calendarStart.getMonth() - 1;
+    var _month = calendarStart.getMonth() + 1;
     for (var i = startWeekDay; i < monthStartDay; i++) {
       var _date = startDate + i;
       results.push({
@@ -941,7 +941,7 @@ function getCalendar(year, month) {
   if (monthEndDay < endWeekDay) {
     var nextMonth = addMonth(clone(date));
     var _year2 = nextMonth.getFullYear();
-    var _month2 = nextMonth.getMonth() - 1;
+    var _month2 = nextMonth.getMonth() + 1;
     for (var _i2 = monthEndDay + 1, _date3 = 1; _i2 <= endWeekDay; _i2++, _date3++) {
       results.push({
         year: _year2,
