@@ -214,3 +214,33 @@ export function getCalendar(year, month, startWeekDay = 0) {
   //
   return hp.splitArray(results, 7)
 }
+
+// datetime, add to date-functions
+//
+// eg: 2018-09-07T03:38:37.888Z
+// timezone must be UTC
+export function is_ISO_UTC_format(str) {
+  return str.length > 15 && str.length < 30 str.match(/^\d{4}-\d{2}-\d{2}T.*Z$/)
+}
+
+// timestamp eg: 2018-09-07T03:38:37.888Z
+export function parse_ISO_UTC_timestamp(timestamp) {
+  const [datePart, timePart] = timestamp.split('T')
+  let y, m, d, h = 0, min = 0, s = 0;
+  [y, m, d] = datePart.split('-').map(v => parseInt(v))
+  m = m - 1
+  if (timePart) {
+    const t = timePart.split('-').map(v => parseFloat(v))
+    h = t[0]
+    if (t[1] != null) {
+      min = t[1]
+    }
+    if (t[2] != null) {
+      s = t[2]
+    }
+  }
+  const dt = new Date(y, m, d, h, min, s)
+  // the dt timezone is current, so reset hour with setUTCHours
+  dt.setUTCHours(h)
+  return dt
+}
