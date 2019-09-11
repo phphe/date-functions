@@ -220,7 +220,7 @@ export function getCalendar(year, month, startWeekDay = 0) {
 // eg: 2018-09-07T03:38:37.888Z
 // timezone must be UTC
 export function is_ISO_UTC_format(str) {
-  return str.length > 15 && str.length < 30 str.match(/^\d{4}-\d{2}-\d{2}T.*Z$/)
+  return str.length > 15 && str.length < 30 && str.match(/^\d{4}-\d{2}-\d{2}T.*Z$/)
 }
 
 // timestamp eg: 2018-09-07T03:38:37.888Z
