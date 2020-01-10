@@ -1,6 +1,6 @@
 {
   "name": "date-functions",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "",
   "main": "dist/date-functions.cjs.js",
   "module": "dist/date-functions.esm.js",
@@ -8,8 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "bili --format cjs --format umd  --format umd-min --format esm --banner",
-    "dev": "bili --watch"
+    "build": "rogo"
   },
   "author": "phphe <phphe@outlook.com> (https://github.com/phphe)",
   "unpkg": "dist/date-functions.js",
@@ -21,16 +20,11 @@
     "url": "https://github.com/phphe/date-functions.git"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/plugin-proposal-export-namespace-from": "^7.5.2",
-    "@babel/plugin-proposal-function-sent": "^7.5.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.2.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
-    "bili": "^4.8.1"
+    "rogo": "^1.0.0"
   },
   "dependencies": {
-    "helper-js": "^1.4.6"
+    "@babel/runtime": "^7.7.7",
+    "helper-js": "^1.4.27"
   },
   "license": "MIT"
 }

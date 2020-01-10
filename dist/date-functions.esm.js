@@ -1,51 +1,11 @@
 /*!
- * date-functions v1.0.11
+ * date-functions v1.0.12
  * (c) phphe <phphe@outlook.com> (https://github.com/phphe)
  * Released under the MIT License.
  */
 import { replaceMultiple, splitArray } from 'helper-js';
 
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
-}
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-function _iterableToArrayLimit(arr, i) {
-  if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-    return;
-  }
-
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-  var _e = undefined;
-
-  try {
-    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance");
-}
+// Most of the methods will affect the original object
 
 function clone(dateObj) {
   return new Date(dateObj.getTime());
@@ -280,33 +240,18 @@ function is_ISO_UTC_format(str) {
 } // timestamp eg: 2018-09-07T03:38:37.888Z
 
 function parse_ISO_UTC_timestamp(timestamp) {
-  var _timestamp$split = timestamp.split('T'),
-      _timestamp$split2 = _slicedToArray(_timestamp$split, 2),
-      datePart = _timestamp$split2[0],
-      timePart = _timestamp$split2[1];
-
+  var [datePart, timePart] = timestamp.split('T');
   var y,
       m,
       d,
       h = 0,
       min = 0,
       s = 0;
-
-  var _datePart$split$map = datePart.split('-').map(function (v) {
-    return parseInt(v);
-  });
-
-  var _datePart$split$map2 = _slicedToArray(_datePart$split$map, 3);
-
-  y = _datePart$split$map2[0];
-  m = _datePart$split$map2[1];
-  d = _datePart$split$map2[2];
+  [y, m, d] = datePart.split('-').map(v => parseInt(v));
   m = m - 1;
 
   if (timePart) {
-    var t = timePart.split('-').map(function (v) {
-      return parseFloat(v);
-    });
+    var t = timePart.split('-').map(v => parseFloat(v));
     h = t[0];
 
     if (t[1] != null) {
